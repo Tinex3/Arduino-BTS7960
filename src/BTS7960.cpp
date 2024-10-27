@@ -18,29 +18,48 @@ BTS7960::BTS7960(uint8_t L_EN, uint8_t R_EN, uint8_t L_PWM, uint8_t R_PWM){
 	pinMode(_R_EN, OUTPUT);
 }
 
-void BTS7960::TurnRight(uint8_t pwm){
-     analogWrite(_L_PWM, 0);
-	 delayMicroseconds(100);
-     analogWrite(_R_PWM, pwm);
+String BTS7960::TurnRight(uint8_t pwm){
+    analogWrite(_L_PWM, 0);
+	delayMicroseconds(100);
+    analogWrite(_R_PWM, pwm);
+	return "Turned Right";
 }
 
-void BTS7960::TurnLeft(uint8_t pwm){
-     analogWrite(_R_PWM, 0);
-	 delayMicroseconds(100);
-     analogWrite(_L_PWM, pwm);
+String BTS7960::TurnUp(uint8_t pwm){
+	analogWrite(_L_PWM, 0);
+	delayMicroseconds(100);
+	analogWrite(_R_PWM, pwm);
+	return "Turned Up";
 }
 
-void BTS7960::Enable(){
+String BTS7960::TurnDown(uint8_t pwm){
+	analogWrite(_R_PWM, 0);
+	delayMicroseconds(100);
+	analogWrite(_L_PWM, pwm);
+	return "Turned Down";
+}
+
+String BTS7960::TurnLeft(uint8_t pwm){
+    analogWrite(_R_PWM, 0);
+	delayMicroseconds(100);
+    analogWrite(_L_PWM, pwm);
+	return "Turned Left";
+}
+
+String BTS7960::Enable(){
 	digitalWrite(_L_EN,1);
-	if(_R_EN != 0) digitalWrite(_R_EN, HIGH);  
+	if(_R_EN != 0) digitalWrite(_R_EN, HIGH);
+	return "Enabled";
 }
 
-void BTS7960::Disable(){
+String BTS7960::Disable(){
 	digitalWrite(_L_EN,0);
 	if(_R_EN != 0) digitalWrite(_R_EN, LOW);
+	return "Disabled";
 }
 
-void BTS7960::Stop(){
-  analogWrite(_L_PWM, LOW);
-  analogWrite(_R_PWM, LOW);
+String BTS7960::Stop(){
+	analogWrite(_L_PWM, LOW);
+	analogWrite(_R_PWM, LOW);
+	return "Stopped";
 }
